@@ -1,62 +1,84 @@
-/*
- * Task 1_1.
- * Using only bit and arithmetic operations, write a function
- * that returns the next even number for unsigned long integer number
+/**
+ * @file task1_1.cpp
+ * @brief Using only bit and arithmetic operations, write a function
+ *        that returns the next even number for unsigned long integer number
+ *
+ * Copyright 2012 by Anatoliy Dobrosynets
  */
 
 #include "stdafx.h"
 #include <iostream>
-#include <conio.h>
 
 using namespace std;
 
 typedef unsigned long int ULI;
 
-// Convert a decimal number to binary and show on display
-void ShowDecAsBin(ULI number)
+/**
+ * @brief This function converts a decimal number to binary and shows on display
+ * @param [in] n unsigned long int number
+ * @return void
+ */
+void ShowDecAsBin(ULI n)
 {
-	int mas[32];
-	int count = 0;
+	int m[32];
+	int i = 0;
 
-	while(number > 1)
+	while(n > 1)
 	{
-		mas[count] = number % 2;
-		number = number / 2;
-		++count;
+		m[i] = n % 2;
+		n = n / 2;
+		i++;
 	}
 
-	mas[count] = number;
+	m[i] = n;
 
-	for (int i = count; i >= 0 ; i--)
-		cout << mas[i];
+	for (int j = i; j >= 0 ; j--)
+		cout << m[j];
 }
 
-// Get next even number
-ULI GetNextEvenNumber(ULI number)
+/**
+ * @brief This function calculates next even number
+ * @param [in] n unsigned long int number
+ * @return next even number
+ */
+ULI GetNextEvenNumber(ULI n)
 {
-	return (number & ~0x1) + 0x2;
+	return (n & ~0x1) + 0x2;
 }
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	ULI number;
-	ULI result;
+	ULI n;
+	ULI r;
 
-	cout << "Enter number (dec): ";
-	cin >> number;
-	
+	// Check for correct input
+	while(true)
+	{
+		cout << "Enter unsigned integer number (dec): ";
+		cin >> n;
+		
+		if(cin.good())	// No error
+		{
+			cin.ignore(100, '\n');	// Delete separator lines
+			break;
+		}
+		cin.clear();	// Clear the bit error
+		cout << "Invalid input!!!" << endl;
+		cin.ignore(100, '\n');
+	}
+		
 	cout << "(bin): ";
-	ShowDecAsBin(number);
+	ShowDecAsBin(n);
 	cout << endl;
 
-	result = GetNextEvenNumber(number);
+	r = GetNextEvenNumber(n);
 
-	cout << "Result (dec): " << result << endl;
+	cout << "The next even number is (dec): " << r << endl;
 	cout << "(bin): ";
-	ShowDecAsBin(result);
+	ShowDecAsBin(r);
 	cout << endl;
 
-	getch();
+	cin.get();
 
 	return 0;
 }

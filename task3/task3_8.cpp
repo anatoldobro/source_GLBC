@@ -1,9 +1,11 @@
-/*
- * Task 3_8.
- * Develop a function that changes the places corresponding to the number
- * elements of two vectors of integers the same length.
- * Based on the developed function to rearrange rows in reverse order
- * imposed by the integer matrix. Print the resulting matrix.
+/**
+ * @file task3_8.cpp
+ * @brief Develop a function that changes the places corresponding to the number
+ *        elements of two vectors of integers the same length.
+ *        Based on the developed function to rearrange rows in reverse order
+ *        imposed by the integer matrix. Print the resulting matrix.
+ *
+ * Copyright 2012 by Anatoliy Dobrosynets
  */
 
 #include "stdafx.h"
@@ -38,24 +40,45 @@ int _tmain(int argc, _TCHAR* argv[])
 	int r,c;
 	int i,j,k;
 	
-	do
+	// Check for correct input
+	while(true)
 	{
 		cout << "Enter size of the matrix (rows <= " << R;
 		cout << " and columns <= " << C << "):\n";
 	
 		cin >> r;
 		cin >> c;
+		
+		if(cin.good() && (r > 0) && (r <= R) && (c > 0) && (c <= C))	// No error
+		{
+			cin.ignore(100, '\n');	// Delete separator lines
+			break;
+		}
+		cin.clear();	// Clear the bit error
+		cout << "Invalid input!!!" << endl;
+		cin.ignore(100, '\n');
 	}
-	while ((r <= 0) || (r > R) || (c <= 0) || (c > C));
 
 	for (i = 0; i < r; i++)
 	{
-		cin.clear();
-		cin.sync();
-
-		cout << "Enter " << i + 1 << " row:\t";
+		cout << "Enter " << i + 1 << " row:\n";
 		for (j = 0; j < c; j++)
-			cin >> mas[i][j];
+			
+			// Check for correct input
+			while(true)
+			{
+				cout << "Enter [" << i << " " << j <<"] element: ";
+				cin >> mas[i][j];
+		
+				if(cin.good())	// No error
+				{
+					cin.ignore(100, '\n');	// Delete separator lines
+					break;
+				}
+				cin.clear();	// Clear the bit error
+				cout << "Invalid input!!!" << endl;
+				cin.ignore(100, '\n');
+			}
 	}
 
 	k = i - 1;
@@ -77,8 +100,6 @@ int _tmain(int argc, _TCHAR* argv[])
 			cout << mas[i][j] << " ";
 	}
 	
-	cin.clear();
-	cin.sync();
 	cin.get();
 	
 	return 0;

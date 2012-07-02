@@ -1,73 +1,111 @@
-/*
- * Task 1_30.
- * Using only bit operations, write a function that returns 1,
- * if the bits in two positions unsigned long integer number is the same
+/**
+ * @file task1_30.cpp
+ * @brief Using only bit operations, write a function that returns 1,
+ *        if the bits in two positions unsigned long integer number is the same
+ *
+ * Copyright 2012 by Anatoliy Dobrosynets
  */
 
 #include "stdafx.h"
 #include <iostream>
-#include <conio.h>
 
 using namespace std;
 
 typedef unsigned long int ULI;
 
-// Convert a decimal number to binary and show on display
-void ShowDecAsBin(ULI number)
+/**
+ * @brief This function converts a decimal number to binary and shows on display
+ * @param [in] n unsigned long int number
+ * @return void
+ */
+void ShowDecAsBin(ULI n)
 {
-	int mas[32];
-	int count = 0;
-
-	while(number > 1)
-	{
-		mas[count] = number % 2;
-		number = number / 2;
-		++count;
-	}
-
-	mas[count] = number;
-
-	for (int i = count; i >= 0 ; i--)
-		cout << mas[i];
+	for(int i = sizeof(ULI) * 8 - 1; i >= 0; i--)
+		cout << (n >> i & 0x1);
 }
 
-// Compare bit positions in number
-ULI CompareBits(ULI number, ULI pos1, ULI pos2)
+/**
+ * @brief This function compares bit positions in number
+ * @param [in] n unsigned long int number
+ * @param [in] p1 position of the bit
+ * @param [in] p2 position of the bit
+ * @return 1 if bits are same else 0
+ */
+ULI CompareBits(ULI n, int p1, int p2)
 {
 	ULI n1;
 	ULI n2;
 	
-	n1 = number >> pos1 & 0x1;
-	n2 = number >> pos2 & 0x1;
+	n1 = n >> p1 & 0x1;
+	n2 = n >> p2 & 0x1;
 	
 	return ~(n1 ^ n2) & 0x1;
 }
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	ULI number;
-	ULI result;
-	ULI pos1;
-	ULI pos2;
+	ULI n;
+	ULI r;
+	int p1;
+	int p2;
 
-	cout << "Enter number (dec): ";
-	cin >> number;
-	
+	// Check for correct input
+	while(true)
+	{
+		cout << "Enter unsigned integer number (dec): ";
+		cin >> n;
+		
+		if(cin.good())	// No error
+		{
+			cin.ignore(100, '\n');	// Delete separator lines
+			break;
+		}
+		cin.clear();	// Clear the bit error
+		cout << "Invalid input!!!" << endl;
+		cin.ignore(100, '\n');
+	}
+		
 	cout << "(bin): ";
-	ShowDecAsBin(number);
+	ShowDecAsBin(n);
 	cout << endl;
 
-	cout << "Enter position 1: ";
-	cin >> pos1;
-
-	cout << "Enter position 2: ";
-	cin >> pos2;
-
-	result = CompareBits(number, pos1, pos2);
-
-	cout << "Result of compare is: " << result << endl;
+	// Check for correct input
+	while(true)
+	{
+		cout << "Enter position 1: ";
+		cin >> p1;
+		
+		if(cin.good() && p1 >= 0)	// No error and no signed number
+		{
+			cin.ignore(100, '\n');	// Delete separator lines
+			break;
+		}
+		cin.clear();	// Clear the bit error
+		cout << "Invalid input!!!" << endl;
+		cin.ignore(100, '\n');
+	}
 	
-	getch();
+	// Check for correct input
+	while(true)
+	{
+		cout << "Enter position 2: ";
+		cin >> p2;
+		
+		if(cin.good() && p2 >= 0)	// No error and no signed number
+		{
+			cin.ignore(100, '\n');	// Delete separator lines
+			break;
+		}
+		cin.clear();	// Clear the bit error
+		cout << "Invalid input!!!" << endl;
+		cin.ignore(100, '\n');
+	}
+	
+	r = CompareBits(n, p1, p2);
+
+	cout << "Result of compare is: " << r << endl;
+	
+	cin.get();
 
 	return 0;
 }

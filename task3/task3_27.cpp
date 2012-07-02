@@ -1,10 +1,12 @@
-/*
- * Task 3_27.
- * Develop a function that removes from the specified character string
- * all numeric characters and returns the number of deleted digits.
- * Enter a sequence of character strings. Using the developed function
- * to print all lines entered without numbers.
- * Indicate with that line removed most characters.
+/**
+ * @file task3_27.cpp
+ * @brief Develop a function that removes from the specified character string
+ *        all digit characters and returns the number of deleted digits.
+ *        Enter a sequence of character strings. Using the developed function
+ *        to print all lines entered without numbers.
+ *        Indicate with that line removed most characters.
+ *
+ * Copyright 2012 by Anatoliy Dobrosynets
  */
 
 #include "stdafx.h"
@@ -65,21 +67,26 @@ int _tmain(int argc, _TCHAR* argv[])
 	int max = 0;
 	int imax = 0;
 	
-	do
+	// Check for correct input
+	while(true)
 	{
 		cout << "Enter count of the strings (count <= " << C << "):\n";
-	
 		cin >> c;
+		
+		if(cin.good() && (c > 0) && (c <= C))	// No error
+		{
+			cin.ignore(100, '\n');	// Delete separator lines
+			break;
+		}
+		cin.clear();	// Clear the bit error
+		cout << "Invalid input!!!" << endl;
+		cin.ignore(100, '\n');
 	}
-	while ((c <= 0) || (c > C));
-
-	cin.clear();
-	cin.sync();
-
+	
 	for (i = 0; i < c; i++)
 	{
 		cout << "\nEnter " << i + 1 << " string:\n";
-		cin >> str[i];
+		gets(str[i]);
 	}
 	
 	cout << "Result:\n";
@@ -98,8 +105,6 @@ int _tmain(int argc, _TCHAR* argv[])
 	cout << "\nMax count digits (" << max;
 	cout << ") deleted in " << imax + 1 << " string\n";
 
-	cin.clear();
-	cin.sync();
 	cin.get();
 
 	return 0;

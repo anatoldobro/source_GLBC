@@ -1,71 +1,109 @@
-/*
- * Task 1_16.
- * Using only bit and arithmetic operations, write a function that returns
- * unsigned long integer number that contains bits of length n,
- * starting from position p (bits numbered from 0 from right to left)
+/**
+ * @file task1_16.cpp
+ * @brief Using only bit and arithmetic operations, write a function that returns
+ *        unsigned long integer number that contains bits of length n,
+ *        starting from position p (bits numbered from 0 from right to left)
+ *
+ * Copyright 2012 by Anatoliy Dobrosynets
  */
 
 #include "stdafx.h"
 #include <iostream>
-#include <conio.h>
 
 using namespace std;
 
 typedef unsigned long int ULI;
 
-// Convert a decimal number to binary and show on display
-void ShowDecAsBin(ULI number)
+/**
+ * @brief This function converts a decimal number to binary and shows on display
+ * @param [in] n unsigned long int number
+ * @return void
+ */
+void ShowDecAsBin(ULI n)
 {
-	int mas[32];
-	int count = 0;
-
-	while(number > 1)
-	{
-		mas[count] = number % 2;
-		number = number / 2;
-		++count;
-	}
-
-	mas[count] = number;
-
-	for (int i = count; i >= 0 ; i--)
-		cout << mas[i];
+	for(int i = sizeof(ULI) * 8 - 1; i >= 0; i--)
+		cout << (n >> i & 0x1);
 }
 
-// Get bits of number
-ULI GetBits(ULI number, ULI p, ULI n)
+/**
+ * @brief This function gets bits of number
+ * @param [in] num unsigned long int number
+ * @param [in] p position of the block of bits
+ * @param [in] n length of the block of bits
+ * @return block of bits of number
+ */
+ULI GetBits(ULI num, int p, int n)
 {
-	return (number >> (p + 1 - n)) & ~(~0 << n);
+	return (num >> (p + 1 - n)) & ~(~0 << n);
 }
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	ULI number;
-	ULI p;
-	ULI n;
-	ULI result;
+	ULI num;
+	int p;
+	int n;
+	ULI r;
 
-	cout << "Enter number (dec): ";
-	cin >> number;
+	// Check for correct input
+	while(true)
+	{
+		cout << "Enter unsigned integer number (dec): ";
+		cin >> num;
+		
+		if(cin.good())	// No error
+		{
+			cin.ignore(100, '\n');	// Delete separator lines
+			break;
+		}
+		cin.clear();	// Clear the bit error
+		cout << "Invalid input!!!" << endl;
+		cin.ignore(100, '\n');
+	}
+
+	cout << "(bin): ";
+	ShowDecAsBin(num);
+	cout << endl;
+
+	// Check for correct input
+	while(true)
+	{
+		cout << "Enter position: ";
+		cin >> p;
+		
+		if(cin.good() && p >= 0)	// No error and no signed number
+		{
+			cin.ignore(100, '\n');	// Delete separator lines
+			break;
+		}
+		cin.clear();	// Clear the bit error
+		cout << "Invalid input!!!" << endl;
+		cin.ignore(100, '\n');
+	}
+
+	// Check for correct input
+	while(true)
+	{
+		cout << "Enter length: ";
+		cin >> n;
+		
+		if(cin.good() && n >= 0)	// No error and no signed number
+		{
+			cin.ignore(100, '\n');	// Delete separator lines
+			break;
+		}
+		cin.clear();	// Clear the bit error
+		cout << "Invalid input!!!" << endl;
+		cin.ignore(100, '\n');
+	}
 	
+	r = GetBits(num, p, n);
+
+	cout << "Result (dec): " << r << endl;
 	cout << "(bin): ";
-	ShowDecAsBin(number);
+	ShowDecAsBin(r);
 	cout << endl;
 
-	cout << "Enter position: ";
-	cin >> p;
-
-	cout << "Enter length: ";
-	cin >> n;
-
-	result = GetBits(number, p, n);
-
-	cout << "Result (dec): " << result << endl;
-	cout << "(bin): ";
-	ShowDecAsBin(result);
-	cout << endl;
-
-	getch();
+	cin.get();
 
 	return 0;
 }
