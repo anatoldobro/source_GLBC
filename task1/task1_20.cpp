@@ -21,7 +21,9 @@ typedef unsigned long int ULI;
 void ShowDecAsBin(ULI n)
 {
 	for(int i = sizeof(ULI) * 8 - 1; i >= 0; i--)
+	{
 		cout << (n >> i & 0x1);
+	}
 }
 
 /**
@@ -58,13 +60,16 @@ int _tmain(int argc, _TCHAR* argv[])
 			cin.ignore(100, '\n');	// Delete separator lines
 			break;
 		}
+		
 		cin.clear();	// Clear the bit error
 		cout << "Invalid input!!!" << endl;
 		cin.ignore(100, '\n');
 	}
 		
 	cout << "(bin): ";
+	
 	ShowDecAsBin(n);
+	
 	cout << endl;
 
 	// Check for correct input
@@ -78,6 +83,7 @@ int _tmain(int argc, _TCHAR* argv[])
 			cin.ignore(100, '\n');	// Delete separator lines
 			break;
 		}
+		
 		cin.clear();	// Clear the bit error
 		cout << "Invalid input!!!" << endl;
 		cin.ignore(100, '\n');
@@ -87,7 +93,9 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	cout << "Result (dec): " << res << endl;
 	cout << "(bin): ";
+	
 	ShowDecAsBin(res);
+	
 	cout << endl;
 
 	cin.get();

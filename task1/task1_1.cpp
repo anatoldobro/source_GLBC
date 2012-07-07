@@ -20,7 +20,7 @@ typedef unsigned long int ULI;
  */
 void ShowDecAsBin(ULI n)
 {
-	int m[32];
+	int m[sizeof(ULI) * 8];
 	int i = 0;
 
 	while(n > 1)
@@ -33,7 +33,9 @@ void ShowDecAsBin(ULI n)
 	m[i] = n;
 
 	for (int j = i; j >= 0 ; j--)
+	{
 		cout << m[j];
+	}
 }
 
 /**
@@ -68,14 +70,18 @@ int _tmain(int argc, _TCHAR* argv[])
 	}
 		
 	cout << "(bin): ";
+	
 	ShowDecAsBin(n);
+	
 	cout << endl;
 
 	r = GetNextEvenNumber(n);
 
 	cout << "The next even number is (dec): " << r << endl;
 	cout << "(bin): ";
+	
 	ShowDecAsBin(r);
+	
 	cout << endl;
 
 	cin.get();
