@@ -1,9 +1,9 @@
 /**
- * @file task3_8.cpp
- * @brief Develop a function that changes the places corresponding to the number
- *        elements of two vectors of integers the same length.
- *        Based on the developed function to rearrange rows in reverse order
- *        imposed by the integer matrix. Print the resulting matrix.
+ * @file task3_6.cpp
+ * @brief Develop a function that sorts array of real numbers in
+ *        order of increasing values of elements. Based on the develop function
+ *        to sort in order of increasing values of the elements of each
+ *        row of the matrix of real numbers.
  *
  * Copyright 2012 by Anatoliy Dobrosynets
  */
@@ -20,27 +20,37 @@ const int R = 10;
 const int C = 10;
 
 /**
- * @brief This function swaps the places elements of two arrays of integer the same length
- * @param [in, out] m Array of integer
- * @param [in, out] n Array of integer
+ * @brief This function sorts array of real numbers
+ * @param [in, out] m Array of float pointer
  * @param [in] l Real length of arrays
  * @return void
  */
-void Swap(int m[], int n[], int l)
+
+void Sort(float* m, int l)
 {
-	for (int i = 0; i < l; i++)
+	float t;
+
+	for(int i = l-1; i > 0; i--)
 	{
-		m[i] ^= n[i] ^= m[i] ^= n[i];
+		for(int j = 0; j < i; j++)
+		{
+			if(m[j] > m[j + 1])
+			{
+				t = m[j];
+				m[j] = m[j + 1];
+				m[j + 1] = t;
+			}
+		}
 	}
 }
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	int mas[R][C];
+	float m[R][C];
 	
 	// Real size of the matrix
 	int r,c;
-	int i,j,k;
+	int i,j;
 	
 	// Check for correct input
 	while(true)
@@ -72,7 +82,7 @@ int _tmain(int argc, _TCHAR* argv[])
 			while(true)
 			{
 				cout << "Enter [" << i << " " << j <<"] element: ";
-				cin >> mas[i][j];
+				cin >> m[i][j];
 		
 				if(cin.good())	// No error
 				{
@@ -87,25 +97,17 @@ int _tmain(int argc, _TCHAR* argv[])
 		}
 	}
 
-	k = i - 1;
-	j = 0;
-
-	// Swap the places elements of two vectors
-	while (j < k)
-	{
-		Swap(mas[j], mas[k], c);
-		j++;
-		k--;
-	}
-
 	cout << "\nResult:\n";
 	
 	for (i = 0; i < r; i++)
 	{
 		cout << endl << i + 1 << "row:\t";
+
+		Sort(m[i], c);
+
 		for (j = 0; j < c; j++)
 		{
-			cout << mas[i][j] << "; ";
+			cout << m[i][j] << "; ";
 		}
 	}
 	

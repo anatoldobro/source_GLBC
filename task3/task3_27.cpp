@@ -11,7 +11,6 @@
 
 #include "stdafx.h"
 #include <iostream>
-#include <string.h>
 
 using namespace std;
 
@@ -35,6 +34,7 @@ int DelDig(char* s)
 
 	p = s;
 	q = s1;
+	
 	while (*p != '\0')
 	{
 		if ((*p >= '0') && (*p <= '9'))
@@ -48,8 +48,10 @@ int DelDig(char* s)
 			n++;
 		}
 	}
+	
 	*q = '\0';
 	n++;
+	
 	memcpy(s, s1, n);
 	
 	return k;
@@ -60,7 +62,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	char str[C][L];
 
 	
-	// Real coun of the strings
+	// Real count of the strings
 	int c;
 	int i,j;
 	int k = 0;
@@ -78,6 +80,7 @@ int _tmain(int argc, _TCHAR* argv[])
 			cin.ignore(100, '\n');	// Delete separator lines
 			break;
 		}
+		
 		cin.clear();	// Clear the bit error
 		cout << "Invalid input!!!" << endl;
 		cin.ignore(100, '\n');
@@ -94,7 +97,9 @@ int _tmain(int argc, _TCHAR* argv[])
 	for (i = 0; i < c; i++)
 	{
 		k = DelDig(str[i]);
+		
 		cout<< "\n" << i+1 << ". "<< str[i];
+		
 		if (k > max)
 		{
 			max = k;
