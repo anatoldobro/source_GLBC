@@ -1,7 +1,7 @@
 /**
  * @file task1_1.cpp
  * @brief Using only bit and arithmetic operations, write a function
- *        that returns the next even number for unsigned long integer number
+ *        that returns the next even number for unsigned long integer number.
  *
  * Copyright 2012 by Anatoliy Dobrosynets
  */

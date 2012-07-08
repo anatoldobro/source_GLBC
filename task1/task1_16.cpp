@@ -2,7 +2,7 @@
  * @file task1_16.cpp
  * @brief Using only bit and arithmetic operations, write a function that returns
  *        unsigned long integer number that contains bits of length n,
- *        starting from position p (bits numbered from 0 from right to left)
+ *        starting from position p (bits numbered from 0 from right to left).
  *
  * Copyright 2012 by Anatoliy Dobrosynets
  */

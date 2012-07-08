@@ -1,7 +1,7 @@
 /**
  * @file task1_20.cpp
  * @brief Using only bit and arithmetic operations, write a function
- *        that performs cyclic shift unsigned long integer number to r bits left
+ *        that performs cyclic shift unsigned long integer number to r bits left.
  *
  * Copyright 2012 by Anatoliy Dobrosynets
  */

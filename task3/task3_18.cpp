@@ -31,7 +31,7 @@ int Insert(float* m, int l, float n)
 		{
 			for(int j = l; j > i; j--)
 			{
-				m[j] = m[j-1];
+				m[j] = m[j - 1];
 			}
 
 			m[i] = n;
@@ -49,12 +49,11 @@ int Insert(float* m, int l, float n)
  * @param [in] l Real length of arrays
  * @return void
  */
-
 void Sort(float* m, int l)
 {
 	float t;
 
-	for(int i = l-1; i > 0; i--)
+	for(int i = l - 1; i > 0; i--)
 	{
 		for(int j = 0; j < i; j++)
 		{

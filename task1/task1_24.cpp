@@ -1,7 +1,7 @@
 /**
  * @file task1_24.cpp
  * @brief Using only bit operations, write a function that swaps the places
- *        groups of 8 bits in unsigned long integer number
+ *        groups of 8 bits in unsigned long integer number.
  *
  * Copyright 2012 by Anatoliy Dobrosynets
  */

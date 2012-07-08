@@ -25,12 +25,11 @@ const int C = 10;
  * @param [in] l Real length of arrays
  * @return void
  */
-
 void Sort(float* m, int l)
 {
 	float t;
 
-	for(int i = l-1; i > 0; i--)
+	for(int i = l - 1; i > 0; i--)
 	{
 		for(int j = 0; j < i; j++)
 		{

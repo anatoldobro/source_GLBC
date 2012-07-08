@@ -1,7 +1,7 @@
 /**
  * @file task1_30.cpp
  * @brief Using only bit operations, write a function that returns 1,
- *        if the bits in two positions unsigned long integer number is the same
+ *        if the bits in two positions unsigned long integer number is the same.
  *
  * Copyright 2012 by Anatoliy Dobrosynets
  */
